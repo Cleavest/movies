@@ -13,14 +13,14 @@ services:
         volumes:
             - ./database.sql:/docker-entrypoint-initdb.d/database.sql
     webflux:
-        image: webfluxfilmsdb
+        image: h4cjjj/webfluxfilmsdb
         container_name: webfluxfilms
         depends_on:
             - db_movie
         ports:
             - 8084:8084
     movie-front:
-        image: movie-front
+        image: h4cjjj/movie-front
         container_name: front
         depends_on:
             - webflux
