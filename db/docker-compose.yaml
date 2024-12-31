@@ -1,0 +1,33 @@
+version: '2.32.0'
+
+services:
+    db_movie:
+        image: postgres:14.15-alpine3.21
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: postgres
+        container_name: db_movie
+        ports:
+            - 5433:5432
+        volumes:
+            - ./database.sql:/docker-entrypoint-initdb.d/database.sql
+    webflux:
+        image: webfluxfilmsdb
+        container_name: webfluxfilms
+        depends_on:
+            - db_movie
+        ports:
+            - 8084:8084
+    movie-front:
+        image: movie-front
+        container_name: front
+        depends_on:
+            - webflux
+        ports:
+            - 3000:3000
+        environment:
+            - NEXT_PUBLIC_API_URL=http://localhost:8084
+            - NEXT_INTERNAL_API_URL=http://webflux:8084
+            - NEXTAUTH_URL=http://localhost:3000
+            - NEXTAUTH_SECRET=b5f59337a612a2a7dc07328f3e7d1a04722967c7f06df20a499a7d3f91ff2a7e
