@@ -5,3 +5,5 @@ private List<House> houseList;
 @JointoColumn(name="shop_id" , referencedColumnName"id")
 @JsonIgnore
 private RealEstateShop shop;
+
+findAllByPriceBetweenOrderByPriceDesc(Integer start, Integer end);
