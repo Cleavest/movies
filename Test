@@ -2,7 +2,7 @@
 private List<House> houseList;
 
 @ManyToOne
-@JointoColumn(name="shop_id" , referencedColumnName"id")
+@JoinColumn(name="shop_id" , referencedColumnName"id")
 @JsonIgnore
 private RealEstateShop shop;
 
